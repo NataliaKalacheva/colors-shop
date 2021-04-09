@@ -5,21 +5,38 @@
         <SliderSlide :slide="currentSlide" :key="i" />
       </template>
     </transition-group>
-    <button class="slider__prev" @click="prev" area-label="Previous">
-      &#10094;
+    <button
+      v-if="currentIndex != 0"
+      class="slider__prev"
+      @click="prev"
+      area-label="Previous"
+    >
+      <IconArrow icon-name="Previous arrow" dir="left" />
     </button>
-    <button class="slider__next" @click="next" area-label="Next">
-      &#10095;
+    <button
+      v-if="currentIndex != total - 1"
+      class="slider__next"
+      @click="next"
+      area-label="Next"
+    >
+      <IconArrow icon-name="Next arrow" />
     </button>
+    <SliderDots :total="total" :active="currentIndex" @change="goToSlide" />
   </div>
 </template>
 
 <script>
 import SliderSlide from "@/components/common/SliderSlide";
+import SliderDots from "@/components/common/SliderDots";
+import IconArrow from "@/components/icons/IconArrow";
 
 export default {
   name: "Slider",
-  components: { SliderSlide },
+  components: {
+    SliderSlide,
+    IconArrow,
+    SliderDots,
+  },
   props: {
     slides: {
       type: Array,
@@ -30,24 +47,28 @@ export default {
     timer: null,
     currentIndex: 0,
   }),
-  // mounted() {
-  //   this.startSlide();
-  // },
   methods: {
     startSlide() {
       this.timer = setInterval(this.next, 4000);
     },
-
     next() {
       this.currentIndex += 1;
+      this.currentIndex = Math.abs(this.currentIndex) % this.total;
     },
     prev() {
       this.currentIndex -= 1;
+      this.currentIndex = Math.abs(this.currentIndex) % this.total;
+    },
+    goToSlide(i) {
+      this.currentIndex = i;
     },
   },
   computed: {
+    total() {
+      return this.slides.length;
+    },
     currentSlide() {
-      return this.slides[Math.abs(this.currentIndex) % this.slides.length];
+      return this.slides[this.currentIndex];
     },
   },
 };
@@ -61,16 +82,19 @@ export default {
 
   &__prev,
   &__next {
+    @include button-reset;
     position: absolute;
-    top: 50%;
+    top: 65%;
+    color: $color-white;
+    transform: translateY(-50%);
   }
 
   &__prev {
-    left: 0;
+    left: 21.875%;
   }
 
   &__next {
-    right: 0;
+    right: 21.875%;
   }
 }
 

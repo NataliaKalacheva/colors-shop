@@ -13,19 +13,19 @@ export default {
   data: () => ({
     imageSlides: [
       {
-        headline: "Lorem Ipsum",
+        title: "Краски",
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!",
         image: require("@/assets/slide1.png"),
       },
       {
-        headline: "Dolor sit",
+        title: "Dolor sit",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         image: require("@/assets/slide2.jpg"),
       },
       {
-        headline: "Lorem Dolor",
+        title: "Lorem Dolor",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         image: require("@/assets/slide3.jpg"),
