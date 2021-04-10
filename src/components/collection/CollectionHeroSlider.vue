@@ -1,5 +1,9 @@
 <template>
-  <Slider v-if="!isMobile" :slides="imageSlides" />
+  <Slider
+    class="collection__hero-slider"
+    v-if="!isMobile"
+    :slides="imageSlides"
+  />
 </template>
 
 <script>
@@ -40,7 +44,6 @@ export default {
   },
   computed: {
     isMobile() {
-      console.log(screen.width);
       if (this.windowWidth <= 1080) {
         return true;
       } else {
@@ -55,3 +58,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.collection__hero-slider {
+  margin-bottom: 72px;
+}
+</style>

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import CollectionHeroSlider from "./components/collection/CollectionHeroSlider.vue";
-import CollectionList from "./components/collection/CollectionList.vue";
+import CollectionHeroSlider from "@/components/collection/CollectionHeroSlider.vue";
+import CollectionList from "@/components/collection/CollectionList.vue";
 
 export default {
   name: "app",

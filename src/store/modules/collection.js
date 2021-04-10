@@ -56,6 +56,7 @@ const collectionStore = {
   },
   getters: {
     collectionProducts: ({ collectionProducts }) => collectionProducts,
+    totalProducts: ({ collectionProducts }) => collectionProducts.length,
   },
 };
 
