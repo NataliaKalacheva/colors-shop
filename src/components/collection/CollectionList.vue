@@ -6,8 +6,22 @@
         <CollectionSorting @sort="sortProducts" />
       </div>
 
-      <ul>
-        <template v-for="product in sortedProducts">
+      <div class="collection__sidebar">
+        <Switcher val="new" v-model="checkedFilters">Новинки</Switcher>
+        <Switcher val="available" v-model="checkedFilters"
+          >Есть в наличии</Switcher
+        >
+        <Switcher val="contract" v-model="checkedFilters">Контрактные</Switcher>
+        <Switcher val="exclusive" v-model="checkedFilters"
+          >Эксклюзивные</Switcher
+        >
+        <Switcher val="compare_at_price" v-model="checkedFilters"
+          >Распродажа</Switcher
+        >
+      </div>
+
+      <ul class="collection__list">
+        <template v-for="product in filteredProducts">
           <ProductItem :key="product.id" :product="product" />
         </template>
       </ul>
@@ -20,6 +34,7 @@
 </template>
 
 <script>
+import Switcher from "@/components/common/Switcher.vue";
 import CollectionSorting from "@/components/collection/CollectionSorting.vue";
 import ProductItem from "@/components/product/ProductItem";
 import { mapGetters } from "vuex";
@@ -29,12 +44,13 @@ export default {
   components: {
     CollectionSorting,
     ProductItem,
+    Switcher,
   },
   data: () => ({
-    filteredBy: "",
     sortedBy: "price-desc",
     reverse: false,
     key: "price",
+    checkedFilters: [],
   }),
   computed: {
     ...mapGetters("collection", ["collectionProducts", "totalProducts"]),
@@ -47,8 +63,6 @@ export default {
         : `${this.totalProducts} товаров`;
     },
     sortedProducts() {
-      console.log("sorting by " + this.key);
-
       return [...this.collectionProducts].sort((a, b) => {
         let modifier = this.reverse ? -1 : 1;
 
@@ -58,27 +72,45 @@ export default {
         return 0;
       });
     },
+    filteredProducts() {
+      let currentProducts = [...this.sortedProducts];
+
+      if (!this.checkedFilters.length) {
+        return currentProducts;
+      }
+
+      this.checkedFilters.forEach((filterKey) => {
+        console.log("I am filtering by " + filterKey);
+        currentProducts = this.filterProductsByKey(currentProducts, filterKey);
+      });
+      return currentProducts;
+    },
   },
   methods: {
     sortProducts(value) {
       this.sortedBy = value;
-      console.log(value);
 
       switch (value) {
         case "price-desc":
+          this.key = "price";
+          this.reverse = true;
+          break;
         case "price-asc":
           this.key = "price";
+          this.reverse = false;
           break;
         case "popular":
           this.key = "rating";
+          this.reverse = true;
           break;
         case "new":
           this.key = "date";
+          this.reverse = false;
           break;
-        default:
-          this.key = "price";
       }
-      console.log(this.key);
+    },
+    filterProductsByKey(products, key) {
+      return products.filter((product) => product[key]);
     },
   },
 };
@@ -86,11 +118,26 @@ export default {
 
 <style lang="scss" scoped>
 .collection {
+  display: grid;
+  grid-template:
+    "a b b"
+    "a c c"
+    "a c c";
+
   &__top-bar {
+    grid-area: b;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-transform: uppercase;
+  }
+
+  &__sidebar {
+    grid-area: a;
+  }
+
+  &__list {
+    grid-area: c;
   }
 }
 </style>
