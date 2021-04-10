@@ -1,14 +1,16 @@
 <template>
   <label class="switcher">
+    <span class="switcher__toggle">
+      <input
+        type="checkbox"
+        class="switcher__input"
+        :value="val"
+        v-model="checked"
+        @change="onChange"
+      />
+      <span class="switcher__slider"></span>
+    </span>
     <span class="switcher__label"><slot /></span>
-    <input
-      type="checkbox"
-      class="switcher__input"
-      :value="val"
-      v-model="checked"
-      @change="onChange"
-    />
-    <span class="switcher__slider"></span>
   </label>
 </template>
 
@@ -41,14 +43,20 @@ export default {
 
 <style lang="scss" scoped>
 .switcher {
-  position: relative;
   display: block;
-  width: 36px;
-  height: 22px;
+  margin-bottom: 10px;
+  text-align: left;
+
+  &__toggle {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 22px;
+    margin-right: 12px;
+  }
 
   &__label {
     display: inline-block;
-    padding-left: 48px;
     font-size: 12px;
     line-height: 1;
     letter-spacing: 0.06em;

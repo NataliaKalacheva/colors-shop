@@ -1,23 +1,13 @@
 <template>
-  <div class="collection">
+  <div class="collection page-width">
     <template v-if="isProducts">
       <div class="collection__top-bar">
-        <p>{{ totalNote }}</p>
+        <p class="collection__total">{{ totalNote }}</p>
         <CollectionSorting @sort="sortProducts" />
       </div>
 
       <div class="collection__sidebar">
-        <Switcher val="new" v-model="checkedFilters">Новинки</Switcher>
-        <Switcher val="available" v-model="checkedFilters"
-          >Есть в наличии</Switcher
-        >
-        <Switcher val="contract" v-model="checkedFilters">Контрактные</Switcher>
-        <Switcher val="exclusive" v-model="checkedFilters"
-          >Эксклюзивные</Switcher
-        >
-        <Switcher val="compare_at_price" v-model="checkedFilters"
-          >Распродажа</Switcher
-        >
+        <CollectionFiltering @filter="onFilter" />
       </div>
 
       <ul class="collection__list">
@@ -34,7 +24,7 @@
 </template>
 
 <script>
-import Switcher from "@/components/common/Switcher.vue";
+import CollectionFiltering from "@/components/collection/CollectionFiltering.vue";
 import CollectionSorting from "@/components/collection/CollectionSorting.vue";
 import ProductItem from "@/components/product/ProductItem";
 import { mapGetters } from "vuex";
@@ -44,7 +34,7 @@ export default {
   components: {
     CollectionSorting,
     ProductItem,
-    Switcher,
+    CollectionFiltering,
   },
   data: () => ({
     sortedBy: "price-desc",
@@ -112,6 +102,9 @@ export default {
     filterProductsByKey(products, key) {
       return products.filter((product) => product[key]);
     },
+    onFilter(filters) {
+      this.checkedFilters = filters;
+    },
   },
 };
 </script>
@@ -120,9 +113,9 @@ export default {
 .collection {
   display: grid;
   grid-template:
-    "a b b"
-    "a c c"
-    "a c c";
+    "a b"
+    "c c"
+    "c c";
 
   &__top-bar {
     grid-area: b;
@@ -132,12 +125,31 @@ export default {
     text-transform: uppercase;
   }
 
-  &__sidebar {
-    grid-area: a;
-  }
-
   &__list {
     grid-area: c;
+  }
+
+  &__total {
+    display: none;
+    margin-top: 0;
+  }
+}
+
+@include mq($tab) {
+  .collection {
+    display: grid;
+    grid-template:
+      "a b b"
+      "a c c"
+      "a c c";
+
+    &__total {
+      display: block;
+    }
+
+    &__sidebar {
+      grid-area: a;
+    }
   }
 }
 </style>
