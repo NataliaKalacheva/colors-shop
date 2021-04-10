@@ -34,6 +34,7 @@ export default {
     filteredBy: "",
     sortedBy: "price-desc",
     reverse: false,
+    key: "price",
   }),
   computed: {
     ...mapGetters("collection", ["collectionProducts", "totalProducts"]),
@@ -46,35 +47,38 @@ export default {
         : `${this.totalProducts} товаров`;
     },
     sortedProducts() {
-      let key;
-      switch (this.curSortedBy) {
-        case "price-desc":
-        case "price-asc":
-          key = "price";
-          break;
-        case "popular":
-          key = "rating";
-          break;
-        case "new":
-          key = "date";
-          break;
-        default:
-          key = "price";
-      }
+      console.log("sorting by " + this.key);
 
       return [...this.collectionProducts].sort((a, b) => {
         let modifier = this.reverse ? -1 : 1;
 
-        if (a[key] < b[key]) return -1 * modifier;
-        if (a[key] > b[key]) return 1 * modifier;
+        if (a[this.key] < b[this.key]) return -1 * modifier;
+        if (a[this.key] > b[this.key]) return 1 * modifier;
 
         return 0;
       });
     },
   },
   methods: {
-    sortProducts(key) {
-      console.log(key);
+    sortProducts(value) {
+      this.sortedBy = value;
+      console.log(value);
+
+      switch (value) {
+        case "price-desc":
+        case "price-asc":
+          this.key = "price";
+          break;
+        case "popular":
+          this.key = "rating";
+          break;
+        case "new":
+          this.key = "date";
+          break;
+        default:
+          this.key = "price";
+      }
+      console.log(this.key);
     },
   },
 };
