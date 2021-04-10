@@ -1,5 +1,5 @@
 <template>
-  <Slider :slides="imageSlides" />
+  <Slider v-if="!isMobile" :slides="imageSlides" />
 </template>
 
 <script>
@@ -11,6 +11,7 @@ export default {
     Slider,
   },
   data: () => ({
+    windowWidth: window.innerWidth,
     imageSlides: [
       {
         title: "Краски",
@@ -32,5 +33,25 @@ export default {
       },
     ],
   }),
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+  },
+  computed: {
+    isMobile() {
+      console.log(screen.width);
+      if (this.windowWidth <= 1080) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
 };
 </script>
