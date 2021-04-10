@@ -17,19 +17,19 @@ export default {
         title: "Краски",
         description:
           "Идеально подходят для стен и других поверхностей. Найди свой идеальный цвет!",
-        image: require("@/assets/slide1.png"),
+        image: require("@/assets/slides/slide1.png"),
       },
       {
         title: "Dolor sit",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: require("@/assets/slide2.jpg"),
+        image: require("@/assets/slides/slide2.jpg"),
       },
       {
         title: "Lorem Dolor",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        image: require("@/assets/slide3.jpg"),
+        image: require("@/assets/slides/slide3.jpg"),
       },
     ],
   }),
