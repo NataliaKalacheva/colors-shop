@@ -17,3 +17,19 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+@mixin ul-reset {
+  margin: 0 0;
+  padding: 0 0;
+  list-style: none;
+}
+
+@mixin text-small {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: right;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

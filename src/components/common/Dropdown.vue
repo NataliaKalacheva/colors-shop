@@ -3,6 +3,7 @@
     <button @click="toggle" class="dropdown__trigger">
       {{ items[selectedIndex].label }}
     </button>
+    <div v-if="open" class="overlay"></div>
     <ul v-if="open" class="dropdown">
       <template v-for="(item, i) in items">
         <li
@@ -72,13 +73,12 @@ export default {
 
   &__wrapper {
     position: relative;
-    width: 280px;
     text-align: right;
   }
 
   &__trigger {
     @include button-reset;
-    text-transform: uppercase;
+    @include text-small;
   }
 
   &__trigger::after {
@@ -97,6 +97,7 @@ export default {
   &__option {
     @include button-reset;
     text-transform: uppercase;
+    text-align: left;
   }
 
   &__item {
@@ -111,6 +112,16 @@ export default {
   &__item:hover:not(.active) {
     background-color: #f4f6f6;
     cursor: pointer;
+  }
+}
+
+@include mq($tab) {
+  .dropdown {
+    &__wrapper {
+      width: 280px;
+      margin-right: 0;
+      margin-left: auto;
+    }
   }
 }
 </style>

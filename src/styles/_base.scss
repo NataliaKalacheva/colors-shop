@@ -16,7 +16,10 @@ body {
 }
 
 h1, .h1 {
-  font-size: 4.5rem
+  font-size: 36px;
+  line-height: 88%;
+  letter-spacing: -0.04em;
+  text-align: left;
 }
 
 .text-center {
@@ -37,6 +40,13 @@ h1, .h1 {
 }
 
 @include mq($tab) {
+  h1, .h1 {
+    font-size: 4.5rem;
+    line-height: 1;
+    letter-spacing: -.2rem;
+    text-align: center;
+  }
+
   .page-width {
     padding: 0 $container-padding;
   }

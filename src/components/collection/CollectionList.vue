@@ -3,7 +3,7 @@
     <template v-if="isProducts">
       <div class="collection__top-bar">
         <p class="collection__total">{{ totalNote }}</p>
-        <CollectionSorting @sort="sortProducts" />
+        <CollectionSorting @sort="sortProducts" class="collection__sorting" />
       </div>
 
       <div class="collection__sidebar">
@@ -116,22 +116,38 @@ export default {
     "a b"
     "c c"
     "c c";
+  grid-template-columns: 30% 70%;
+  margin-top: 48px;
 
   &__top-bar {
+    margin-bottom: 24px;
     grid-area: b;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-transform: uppercase;
+    min-width: 0;
+  }
+
+  &__sidebar {
+    margin-bottom: 24px;
+    text-align: left;
   }
 
   &__list {
+    @include ul-reset;
     grid-area: c;
   }
 
   &__total {
     display: none;
-    margin-top: 0;
+    margin: 0 0;
+    white-space: nowrap;
+    @include text-small;
+  }
+
+  &__sorting {
+    width: 100%;
   }
 }
 
@@ -149,6 +165,10 @@ export default {
 
     &__sidebar {
       grid-area: a;
+      margin-bottom: 44px;
+    }
+    &__top-bar {
+      margin-bottom: 44px;
     }
   }
 }

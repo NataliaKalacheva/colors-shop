@@ -4,6 +4,9 @@
     v-if="!isMobile"
     :slides="imageSlides"
   />
+  <div class="page-width" v-else>
+    <h1>Краски</h1>
+  </div>
 </template>
 
 <script>

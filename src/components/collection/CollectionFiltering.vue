@@ -39,7 +39,7 @@ export default {
     Switcher,
   },
   data: () => ({
-    showSwitchers: true,
+    showSwitchers: false,
     checkedFilters: [],
   }),
   watch: {
@@ -64,6 +64,10 @@ export default {
 
 <style lang="scss" scoped>
 .filters {
+  &__toggle {
+    @include button-reset;
+    @include text-small;
+  }
 }
 @include mq-max($tab) {
   .filters {
@@ -81,11 +85,10 @@ export default {
     &__switchers.is-active {
       display: block;
     }
-    &__toggle {
-      @include button-reset;
-    }
     &__toggle--inner {
       padding-bottom: 54px;
+      margin: 0 auto;
+      display: block;
     }
   }
 }
