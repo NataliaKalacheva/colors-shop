@@ -9,7 +9,11 @@ $container-padding-mobile: 24px;
 $slider-aspect-ratio: 29.16666%;
 
 $tab: 768px;
+$lap: 1080px;
+$desk: 1200px;
 
 $breakpoints: (
   "tab" $tab,
+  "lap" $lap,
+  "desk" $desk
 );

@@ -1,4 +1,5 @@
 export default {
-  CART_TOTAL: "CART_TOTAL",
   ADD_CART_ITEM: "ADD_CART_ITEM",
+  OPEN_CART: "OPEN_CART",
+  CLOSE_CART: "CLOSE_CART",
 };

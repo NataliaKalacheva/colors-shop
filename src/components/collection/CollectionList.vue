@@ -6,9 +6,9 @@
         <CollectionSorting @sort="sortProducts" class="collection__sorting" />
       </div>
 
-      <div class="collection__sidebar">
+      <aside class="collection__sidebar">
         <CollectionFiltering @filter="onFilter" />
-      </div>
+      </aside>
 
       <ul class="collection__list">
         <template v-for="product in filteredProducts">
@@ -38,7 +38,7 @@ export default {
   },
   data: () => ({
     sortedBy: "price-desc",
-    reverse: false,
+    reverse: true,
     key: "price",
     checkedFilters: [],
   }),
@@ -137,6 +137,10 @@ export default {
   &__list {
     @include ul-reset;
     grid-area: c;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 14.99px;
+    grid-row-gap: 24px;
   }
 
   &__total {
@@ -166,9 +170,38 @@ export default {
     &__sidebar {
       grid-area: a;
       margin-bottom: 44px;
+      margin-right: 70px;
     }
     &__top-bar {
       margin-bottom: 44px;
+    }
+    &__list {
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 24px;
+      grid-row-gap: 16px;
+    }
+  }
+}
+
+@include mq($lap) {
+  .collection {
+    &__list {
+      grid-template-columns: repeat(4, 1fr);
+      grid-column-gap: 24px;
+      grid-row-gap: 16px;
+    }
+  }
+}
+
+@include mq($desk) {
+  .collection {
+    &__list {
+      grid-template-columns: repeat(5, 1fr);
+      grid-column-gap: 24px;
+      grid-row-gap: 16px;
+    }
+    &__sidebar {
+      margin-right: 140px;
     }
   }
 }

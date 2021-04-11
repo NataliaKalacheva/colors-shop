@@ -43,7 +43,8 @@ export default {
       this.open = !this.open;
     },
     close(e) {
-      if (!this.$el.contains(e.target)) {
+      const overlay = this.$el.querySelector(".overlay");
+      if (!this.$el.contains(e.target) || e.target === overlay) {
         this.open = false;
       }
     },
@@ -70,6 +71,7 @@ export default {
   font-size: 0.75rem;
   list-style: none;
   text-align: left;
+  z-index: 2;
 
   &__wrapper {
     position: relative;
