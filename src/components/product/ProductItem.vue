@@ -35,7 +35,9 @@ export default {
   methods: {
     ...mapActions("cart", ["addToCart", "openCart"]),
     onClickAtc(product) {
-      this.addToCart(product);
+      const cartItem = JSON.parse(JSON.stringify(product));
+      cartItem.quantity = 1;
+      this.addToCart(cartItem);
       this.openCart();
     },
   },
