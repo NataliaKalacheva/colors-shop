@@ -1,7 +1,7 @@
 <template>
   <svg
-    width="48"
-    height="48"
+    :width="width"
+    :height="height"
     viewBox="0 0 48 48"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +20,33 @@
       stroke-linecap="round"
       stroke-linejoin="round"
     />
-    <circle opacity="0.1" cx="24" cy="24" r="23.5" stroke="black" />
+    <circle
+      v-if="isBordered"
+      opacity="0.1"
+      cx="24"
+      cy="24"
+      r="23.5"
+      stroke="black"
+    />
   </svg>
 </template>
+
+<script>
+export default {
+  name: "IconClose",
+  props: {
+    isBordered: {
+      type: Boolean,
+      default: false,
+    },
+    width: {
+      type: [Number, String],
+      default: 48,
+    },
+    height: {
+      type: [Number, String],
+      default: 48,
+    },
+  },
+};
+</script>

@@ -4,7 +4,9 @@
     <div v-if="cartOpen" class="cart__drawer">
       <header class="cart__header">
         <h2 class="cart__title">Корзина</h2>
-        <button class="cart__close" @click="closeCart"><IconClose /></button>
+        <button class="cart__close" @click="closeCart">
+          <IconClose is-bordered />
+        </button>
       </header>
       <div class="cart__main" v-if="cartItemsQty">
         <aside class="cart__meta">
@@ -15,13 +17,13 @@
         </aside>
         <ul class="cart__list">
           <template v-for="item in cartItems">
-            {{ item }}
+            <CartItem :product="item" :key="item.id" />
           </template>
         </ul>
         <div class="cart__footer">
           <p class="cart__total">
             Итого
-            <span class="cart__total-price h2">{{ cartTotalPrice }}руб</span>
+            <span class="cart__total-price h2">{{ totalPrice }}руб</span>
           </p>
           <button class="cart__checkout-btn">Оформить заказ</button>
         </div>
@@ -34,11 +36,13 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import IconClose from "@/components/icons/IconClose";
+import CartItem from "@/components/cart/CartItem";
 
 export default {
   name: "CartDrawer",
   components: {
     IconClose,
+    CartItem,
   },
   created() {
     window.addEventListener("click", this.close);
@@ -61,6 +65,9 @@ export default {
         return `${this.cartItemsQty} товара`;
       }
       return `${this.cartItemsQty} товаров`;
+    },
+    totalPrice() {
+      return this.cartTotalPrice.toLocaleString().replace(",", " ");
     },
   },
   methods: {
@@ -126,6 +133,9 @@ export default {
     height: 100vh;
     background: white;
     z-index: 2;
+  }
+  &__list {
+    @include ul-reset;
   }
   &__total {
     text-align: left;

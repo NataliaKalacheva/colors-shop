@@ -17,6 +17,7 @@ const cartStore = {
         id: 1,
         title: "Краска Wallquest, Brownsone MS90102",
         available: true,
+        sku: 20,
         price: 6000,
         compare_at_price: null,
         rating: 5,
@@ -30,6 +31,7 @@ const cartStore = {
         id: 2,
         title: "Краска Wallquest, Brownsone MS90102",
         available: false,
+        sku: 10,
         price: 4800,
         compare_at_price: null,
         contract: true,
@@ -44,6 +46,7 @@ const cartStore = {
         id: 3,
         title: "Краска Wallquest, Brownsone MS90102",
         available: true,
+        sku: 5,
         price: 5290,
         compare_at_price: null,
         contract: false,
@@ -99,6 +102,9 @@ const cartStore = {
     },
     cleanCart({ commit }) {
       commit(CLEAN_CART);
+    },
+    updateQty({ commit }, { id, qty }) {
+      commit(UPDATE_QTY, { id, qty });
     },
   },
 };
