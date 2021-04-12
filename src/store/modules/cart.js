@@ -7,6 +7,7 @@ const {
   CLOSE_CART,
   UPDATE_QTY,
   CLEAN_CART,
+  DELETE_ITEM,
 } = mutations;
 
 const cartStore = {
@@ -63,7 +64,7 @@ const cartStore = {
     cartItems: ({ cartItems }) => cartItems,
     cartTotalPrice: ({ cartItems }) =>
       Object.keys(cartItems).reduce(
-        (acc, key) => acc + cartItems[key].price,
+        (acc, key) => acc + cartItems[key].price * cartItems[key].quantity,
         0
       ),
     cartItemsQty: ({ cartItems }) => Object.keys(cartItems).length,
@@ -85,6 +86,9 @@ const cartStore = {
     [CLEAN_CART](state) {
       state.cartItems = {};
     },
+    [DELETE_ITEM](state, id) {
+      Vue.delete(state.cartItems, id);
+    },
   },
   actions: {
     addToCart({ commit, getters }, product) {
@@ -105,6 +109,9 @@ const cartStore = {
     },
     updateQty({ commit }, { id, qty }) {
       commit(UPDATE_QTY, { id, qty });
+    },
+    deleteItem({ commit }, id) {
+      commit(DELETE_ITEM, id);
     },
   },
 };

@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="cart-item__actions">
-      <InputNumber :min="1" :max="maxValue" v-model="itemQty">
+      <InputNumber :min="1" :max="product.sku" v-model="product.quantity">
         <template v-slot:increment>
           <IconPlus />
         </template>
@@ -22,7 +22,11 @@
           <IconMinus />
         </template>
       </InputNumber>
-      <button class="cart-item__delete" area-label="Delete product">
+      <button
+        class="cart-item__delete"
+        area-label="Delete product"
+        @click="deleteItem(product.id)"
+      >
         <IconClose width="28" height="28" />
       </button>
     </div>
@@ -50,21 +54,8 @@ export default {
     IconPlus,
     IconMinus,
   },
-  computed: {
-    itemQty: {
-      get() {
-        return this.product.quantity;
-      },
-      set(newName) {
-        return newName;
-      },
-    },
-    maxValue() {
-      return this.product.sku;
-    },
-  },
   methods: {
-    ...mapActions("cart", ["updateQty"]),
+    ...mapActions("cart", ["updateQty", "deleteItem"]),
   },
 };
 </script>
@@ -89,8 +80,7 @@ export default {
   }
 
   &__info {
-    margin-right: 65px;
-    width: 165px;
+    margin-right: 10px;
     text-align: left;
   }
 
@@ -103,14 +93,14 @@ export default {
   &__title {
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1.2;
     letter-spacing: 0.02em;
   }
 
   &__price {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1;
   }
 
@@ -121,6 +111,28 @@ export default {
 
     &:hover {
       opacity: 1;
+    }
+  }
+
+  .input-number {
+    transform: scale(0.8);
+  }
+}
+
+@include mq($tab) {
+  .cart-item {
+    &__info {
+      margin-right: 65px;
+      width: 165px;
+    }
+    &__title {
+      font-size: 16px;
+    }
+    .input-number {
+      transform: scale(1);
+    }
+    &__price {
+      font-size: 16px;
     }
   }
 }

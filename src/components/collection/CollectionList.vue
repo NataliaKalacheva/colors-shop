@@ -10,15 +10,19 @@
         <CollectionFiltering @filter="onFilter" />
       </aside>
 
-      <ul class="collection__list">
+      <ul class="collection__list" v-if="totalFiltered">
         <template v-for="product in filteredProducts">
           <ProductItem :key="product.id" :product="product" />
         </template>
       </ul>
+
+      <template v-else
+        >Нет соответствующих товаров, попробуйте другой фильтр</template
+      >
     </template>
 
     <template v-else>
-      <div>No items</div>
+      <div>Нет продуктов</div>
     </template>
   </div>
 </template>
@@ -47,10 +51,17 @@ export default {
     isProducts() {
       return Boolean(this.totalProducts);
     },
+    totalFiltered() {
+      return this.filteredProducts.length;
+    },
     totalNote() {
-      return this.totalProducts === 1
-        ? `${this.totalProducts} товар`
-        : `${this.totalProducts} товаров`;
+      if (this.totalFiltered === 1) {
+        return `${this.totalFiltered} товар`;
+      }
+      if (this.totalFiltered <= 4 && this.totalFiltered > 1) {
+        return `${this.totalFiltered} товара`;
+      }
+      return `${this.totalFiltered} товаров`;
     },
     sortedProducts() {
       return [...this.collectionProducts].sort((a, b) => {
@@ -70,7 +81,6 @@ export default {
       }
 
       this.checkedFilters.forEach((filterKey) => {
-        console.log("I am filtering by " + filterKey);
         currentProducts = this.filterProductsByKey(currentProducts, filterKey);
       });
       return currentProducts;
@@ -111,6 +121,7 @@ export default {
 
 <style lang="scss" scoped>
 .collection {
+  position: relative;
   display: grid;
   grid-template:
     "a b"
@@ -118,6 +129,17 @@ export default {
     "c c";
   grid-template-columns: 30% 70%;
   margin-top: 48px;
+  margin-bottom: 70px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: $color-white;
+  }
 
   &__top-bar {
     margin-bottom: 24px;
@@ -195,6 +217,7 @@ export default {
 
 @include mq($desk) {
   .collection {
+    margin-bottom: 147px;
     &__list {
       grid-template-columns: repeat(5, 1fr);
       grid-column-gap: 24px;

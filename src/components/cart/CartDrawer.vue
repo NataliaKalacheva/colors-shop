@@ -84,7 +84,7 @@ export default {
   &__title {
     margin: 0 0;
   }
-  &__footer,
+
   &__header,
   &__meta {
     display: flex;
@@ -142,13 +142,10 @@ export default {
     font-size: 1rem;
     line-height: 1;
   }
-  &__total-price {
-    display: block;
-    margin-top: 6px;
-  }
+
   &__checkout-btn {
     @include button-reset;
-    min-width: 240px;
+    width: 100%;
     padding: 20px 20px 21px;
     background: $color-green;
     text-transform: uppercase;
@@ -168,6 +165,18 @@ export default {
     }
     &__header {
       margin-bottom: 80px;
+    }
+    &__checkout-btn {
+      max-width: 240px;
+    }
+    &__total-price {
+      display: block;
+      margin-top: 6px;
+    }
+    &__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 }

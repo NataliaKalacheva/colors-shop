@@ -24,7 +24,7 @@ h1, .h1 {
 
 h2, .h2 {
   font-weight: 500;
-  font-size: 30px;
+  font-size: 22px;
   line-height: .88;
   letter-spacing: -0.04em;
 }
@@ -68,6 +68,10 @@ h2, .h2 {
     line-height: 1;
     letter-spacing: -.2rem;
     text-align: center;
+  }
+
+  h2, .h2 {
+    font-size: 30px;
   }
 
   .page-width {
