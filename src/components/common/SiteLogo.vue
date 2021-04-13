@@ -13,7 +13,7 @@ export default {
   position: relative;
   display: inline-block;
   margin-right: 12px;
-  font-family: TT Hoves;
+  font-family: TT Noves, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 30px;
