@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <CollectionHeroSlider />
     <CollectionList />
     <CartDrawer />
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import Header from "@/components/header/Header.vue";
 import CollectionHeroSlider from "@/components/collection/CollectionHeroSlider.vue";
 import CollectionList from "@/components/collection/CollectionList.vue";
 import CartDrawer from "@/components/cart/CartDrawer.vue";
@@ -14,6 +16,7 @@ import CartDrawer from "@/components/cart/CartDrawer.vue";
 export default {
   name: "app",
   components: {
+    Header,
     CollectionHeroSlider,
     CollectionList,
     CartDrawer,

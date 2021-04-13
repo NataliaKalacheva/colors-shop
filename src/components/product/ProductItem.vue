@@ -77,11 +77,11 @@ export default {
   &__btn {
     @include button-reset;
     background-color: $color-milk;
-    border-radius: 4px;
-    padding: 2px 16.5px;
+    border-radius: 8px;
+    padding: 4px 16.5px 2px;
 
     &:hover {
-      background-color: #ccc;
+      background-color: $color-green;
     }
 
     &.disabled {
@@ -91,6 +91,19 @@ export default {
       &:hover {
         background-color: #eee;
       }
+    }
+  }
+}
+
+@include mq($desk) {
+  .product-item {
+    &__btn {
+      opacity: 0;
+      transition: opacity 0.3s linear;
+    }
+
+    &:hover .product-item__btn {
+      opacity: 1;
     }
   }
 }

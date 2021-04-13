@@ -58,7 +58,7 @@ const cartStore = {
         quantity: 1,
       },
     },
-    cartOpen: true,
+    cartOpen: false,
   },
   getters: {
     cartItems: ({ cartItems }) => cartItems,
